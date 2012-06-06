@@ -1,0 +1,217 @@
+CREATE TABLE [alert](
+	[searchno] [varchar](60) NOT NULL,
+	[candiid] [varchar](60) NOT NULL,
+	[query] [varchar](max) NOT NULL CONSTRAINT [alertqueryDefault]  DEFAULT (''),
+	[queryname] [varchar](250) NOT NULL CONSTRAINT [alertquerynameDefault]  DEFAULT (''),
+	[email] [varchar](250) NOT NULL CONSTRAINT [alertemailDefault]  DEFAULT (''),
+	[verified] [varchar](1) NOT NULL CONSTRAINT [alertverifiedDefault]  DEFAULT ('N'),
+	[fireddate] [smalldatetime] NOT NULL CONSTRAINT [alertfireddateDefault]  DEFAULT (getdate()),
+	[jointype] [varchar](60) NOT NULL CONSTRAINT [jointypeDefault]  DEFAULT ('Left Join'),
+ CONSTRAINT [alert_PrimaryKey] PRIMARY KEY CLUSTERED 
+(
+	[searchno] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+ ON [PRIMARY]
+) ON [PRIMARY]
+
+
+
+CREATE TABLE [blacklisted](
+	[pid] [varchar](60) NOT NULL,
+	[memberidblocked] [varchar](60) NOT NULL CONSTRAINT [blacklistedmemberidblockedDefault]  DEFAULT (''),
+	[fname] [varchar](250) NOT NULL CONSTRAINT [blacklistedfnameDefault]  DEFAULT (''),
+	[lname] [varchar](250) NOT NULL CONSTRAINT [blacklistedlnameDefault]  DEFAULT (''),
+	[upddate] [smalldatetime] NOT NULL CONSTRAINT [blacklistedupddateDefault]  DEFAULT (getdate()),
+ CONSTRAINT [pkblacklisted] PRIMARY KEY CLUSTERED 
+(
+	[pid] ASC,
+	[memberidblocked] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON,
+ ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+
+
+CREATE TABLE [Country](
+	[countryid] [int] NOT NULL,
+	[countryname] [varchar](250) NOT NULL CONSTRAINT [CountrycountrynameDefault]  DEFAULT (''),
+ CONSTRAINT [pkcountry] PRIMARY KEY CLUSTERED 
+(
+	[countryid] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF,
+ ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+
+CREATE TABLE [favorities](
+	[pid] [varchar](60) NOT NULL,
+	[memberidfav] [varchar](60) NOT NULL CONSTRAINT [favoritiesmemberidfavDefault]  DEFAULT (''),
+	[fname] [varchar](250) NOT NULL CONSTRAINT [favoritiesfnameDefault]  DEFAULT (''),
+ CONSTRAINT [pkfavorities] PRIMARY KEY CLUSTERED 
+(
+	[pid] ASC,
+	[memberidfav] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, 
+ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+
+CREATE TABLE [passwordrequests](
+	[requestid] [varchar](50) NOT NULL,
+	[frompid] [varchar](60) NOT NULL CONSTRAINT [passwordrequestsfrompidDefault]  DEFAULT (''),
+	[topid] [varchar](60) NOT NULL CONSTRAINT [passwordrequeststopidDefault]  DEFAULT (''),
+	[fromemail] [varchar](250) NOT NULL CONSTRAINT [passwordrequestsfromemailDefault]  DEFAULT (''),
+	[fname] [varchar](250) NOT NULL CONSTRAINT [passwordrequestsfnameDefault]  DEFAULT (''),
+	[lname] [varchar](250) NOT NULL CONSTRAINT [passwordrequestslnameDefault]  DEFAULT (''),
+ CONSTRAINT [pkpasswordrequest] PRIMARY KEY CLUSTERED 
+(
+	[requestid] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF,
+ ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+
+
+CREATE TABLE [paymentApproved](
+	[pid] [varchar](60) NOT NULL CONSTRAINT [[dbo]].[paymentApproved]]pidDefault]  DEFAULT (''),
+	[amtapproved] [money] NOT NULL CONSTRAINT [[dbo]].[paymentApproved]]amtapprovedDefault]  DEFAULT ((0)),
+	[approvaldate] [smalldatetime] NOT NULL CONSTRAINT [paymentApprovedapprovaldateDefault] 
+	 DEFAULT (getdate()),
+	[paymentnumber] [varchar](60) NOT NULL CONSTRAINT [paymentApprovedpaymentnumberDefault]  DEFAULT (''),
+	[paymentdate] [smalldatetime] NOT NULL CONSTRAINT [[dbo]].[paymentApproved]]paymentdateDefault]  DEFAULT (getdate()),
+	[payid] [varchar](60) NOT NULL CONSTRAINT [[dbo]].[paymentApproved]]payidDefault]  DEFAULT (''),
+	[amtpaid] [money] NOT NULL CONSTRAINT [[dbo]].[paymentApproved]]amtpaidDefault]  DEFAULT ((0)),
+	[actualpaymentdate] [varchar](150) NOT NULL CONSTRAINT
+	[actualpaymentdateDefault]  DEFAULT (''),
+ CONSTRAINT [pkpaymentapproved] PRIMARY KEY CLUSTERED 
+(
+	[payid] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF,
+ ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+
+CREATE TABLE [photo](
+	[photoid] [varchar](60) NOT NULL,
+	[photoname] [varchar](250) NOT NULL CONSTRAINT [photophotonameDefault]  DEFAULT (''),
+	[photopath] [varchar](250) NOT NULL CONSTRAINT [photophotopathDefault]  DEFAULT (''),
+	[pid] [varchar](60) NOT NULL CONSTRAINT [photopidDefault]  DEFAULT (''),
+	[active] [varchar](1) NOT NULL CONSTRAINT [photoactiveDefault]  DEFAULT ('N'),
+	[datasize] [varchar](50) NOT NULL CONSTRAINT [photodatasizeDefault]  DEFAULT (''),
+	[passw] [varchar](50) NOT NULL CONSTRAINT [photopasswDefault]  DEFAULT (''),
+	[uploaddate] [smalldatetime] NOT NULL CONSTRAINT [photouploaddateDefault]  DEFAULT (getdate()),
+ CONSTRAINT [photo_PrimaryKey] PRIMARY KEY CLUSTERED 
+(
+	[photoid] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON,
+ ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+
+
+
+CREATE TABLE [Profile](
+	[pid] [varchar](60) NOT NULL,
+	[headline] [varchar](250) NOT NULL CONSTRAINT [ProfileheadlineDefault]  DEFAULT (''),
+	[fname] [varchar](250) NOT NULL CONSTRAINT [ProfilefnameDefault]  DEFAULT (''),
+	[lname] [varchar](250) NOT NULL CONSTRAINT [ProfilelnameDefault]  DEFAULT (''),
+	[bdate] [smalldatetime] NOT NULL CONSTRAINT [[dbo]].[Profile]]bdateDefault]  DEFAULT (getdate()),
+	[purpose] [varchar](250) NOT NULL CONSTRAINT [ProfilepurposeDefault]  DEFAULT (''),
+	[gender] [varchar](1) NOT NULL CONSTRAINT [ProfilegenderDefault]  DEFAULT ('M'),
+	[email] [varchar](250) NOT NULL CONSTRAINT [Profile]]emailDefault]  DEFAULT (''),
+	[countryid] [int] NOT NULL CONSTRAINT [countryidDefault]  DEFAULT ((1)),
+	[countryname] [varchar](250) NOT NULL CONSTRAINT [countrynameDefault]  DEFAULT (''),
+	[state] [varchar](250) NOT NULL CONSTRAINT [stateDefault]  DEFAULT (''),
+	[cityname] [varchar](250) NOT NULL CONSTRAINT [ProfilecitynameDefault]  DEFAULT (''),
+	[whoami] [varchar](max) NOT NULL CONSTRAINT [ProfilewhoamiDefault]  DEFAULT (''),
+	[lookingfor] [varchar](max) NOT NULL CONSTRAINT [ProfilelookingforDefault]  DEFAULT (''),
+	[profiledate] [smalldatetime] NOT NULL CONSTRAINT [profiledateDefault]  DEFAULT (getdate()),
+	[LastVisited] [smalldatetime] NOT NULL CONSTRAINT [LastVisitedDefault]  DEFAULT (getdate()),
+	[lastupdated] [smalldatetime] NOT NULL CONSTRAINT [lastupdatedDefault]  DEFAULT (getdate()),
+	[banned] [varchar](1) NOT NULL CONSTRAINT [bannedDefault]  DEFAULT ('N'),
+	[ipaddress] [varchar](250) NOT NULL CONSTRAINT [ipaddressDefault]  DEFAULT (''),
+	[maritalstatus] [varchar](250) NOT NULL CONSTRAINT [maritalstatusDefault]  DEFAULT (''),
+	[mothertounge] [varchar](250) NOT NULL CONSTRAINT [mothertoungeDefault]  DEFAULT (''),
+	[height] [int] NOT NULL CONSTRAINT [heightDefault]  DEFAULT ((0)),
+	[annualincome] [varchar](250) NOT NULL CONSTRAINT [annualincomeDefault]  DEFAULT (''),
+	[familydetails] [varchar](max) NOT NULL CONSTRAINT [familydetailsDefault]  DEFAULT (''),
+	[profession] [varchar](250) NOT NULL CONSTRAINT [professionDefault]  DEFAULT (''),
+	[passw] [varchar](50) NOT NULL CONSTRAINT [passwDefault]  DEFAULT (''),
+	[htname] [varchar](50) NOT NULL CONSTRAINT [htnameDefault]  DEFAULT (''),
+	[castename] [varchar](250) NOT NULL CONSTRAINT [castenameDefault]  DEFAULT (''),
+	[eyesight] [varchar](150) NOT NULL CONSTRAINT [eyesightDefault]  DEFAULT (''),
+	[wt] [varchar](250) NOT NULL CONSTRAINT [wtDefault]  DEFAULT (''),
+	[complexion] [varchar](250) NOT NULL CONSTRAINT [complexionDefault]  DEFAULT (''),
+	[caste] [varchar](250) NOT NULL CONSTRAINT [casteDefault]  DEFAULT (''),
+	[cityid] [varchar](250) NOT NULL CONSTRAINT [cityidDefault]  DEFAULT (''),
+	[verifiedemail] [varchar](1) NOT NULL CONSTRAINT [verifiedemailDefault]  DEFAULT ('Y'),
+	[religion] [varchar](250) NOT NULL CONSTRAINT [religionDefault]  DEFAULT ('Y'),
+	[zipcode] [varchar](150) NOT NULL CONSTRAINT [zipcodeDefault]  DEFAULT (''),
+	[ref1] [varchar](60) NOT NULL CONSTRAINT [ref1Default]  DEFAULT (''),
+	[approved] [varchar](1) NOT NULL CONSTRAINT [approvedDefault]  DEFAULT ('N'),
+	[hid] [varchar](1) NOT NULL CONSTRAINT [hidDefault]  DEFAULT ('N'),
+	[isonlinenow] [varchar](1) NOT NULL CONSTRAINT [isonlinenowDefault]  DEFAULT ('N'),
+	[ethnic] [varchar](250) NOT NULL CONSTRAINT [ethnicDefault]  DEFAULT (''),
+	[starsign] [varchar](250) NOT NULL CONSTRAINT [starsignDefault]  DEFAULT (''),
+	[haircolor] [varchar](250) NOT NULL CONSTRAINT [haircolorDefault]  DEFAULT (''),
+	[education] [varchar](250) NOT NULL CONSTRAINT [educationDefault]  DEFAULT (''),
+	[nature] [varchar](250) NOT NULL CONSTRAINT [natureDefault]  DEFAULT (''),
+	[smoke] [varchar](250) NOT NULL CONSTRAINT [smokeDefault]  DEFAULT (''),
+	[Drink] [varchar](250) NOT NULL CONSTRAINT [DrinkDefault]  DEFAULT (''),
+	[diet] [varchar](250) NOT NULL CONSTRAINT [dietDefault]  DEFAULT (''),
+	[drugs] [varchar](250) NOT NULL CONSTRAINT [drugsDefault]  DEFAULT (''),
+	[children] [varchar](250) NOT NULL CONSTRAINT [childrenDefault]  DEFAULT (''),
+	[thoughtsofmarriage] [varchar](250) NOT NULL CONSTRAINT [thoughtsofmarriageDefault]  DEFAULT (''),
+	[political] [varchar](250) NOT NULL CONSTRAINT [politicalDefault]  DEFAULT (''),
+	[visibletoall] [varchar](1) NOT NULL CONSTRAINT [visibletoallDefault]  DEFAULT ('Y'),
+	[ref2] [varchar](60) NOT NULL CONSTRAINT [ref2Default]  DEFAULT (''),
+	[ref1val] [numeric](19, 2) NOT NULL CONSTRAINT [ref1valDefault]  DEFAULT ((0)),
+	[ref2val] [numeric](19, 2) NOT NULL CONSTRAINT [ref2valDefault]  DEFAULT ((0)),
+	[paid] [varchar](1) NOT NULL CONSTRAINT [paidDefault]  DEFAULT ('N'),
+	[Susp] [varchar](1) NOT NULL CONSTRAINT [SuspDefault]  DEFAULT ('N'),
+	[isdoubtful] [varchar](1) NOT NULL CONSTRAINT [isdoubtfulDefault]  DEFAULT ('N'),
+	[ipcountry] [varchar](250) NOT NULL CONSTRAINT [ipcountryDefault]  DEFAULT (''),
+ CONSTRAINT [profilepk] PRIMARY KEY CLUSTERED 
+(
+	[pid] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON,
+ ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+CREATE TABLE [profileviews](
+	[viewedbyid] [varchar](60) NOT NULL,
+	[pidof] [varchar](60) NOT NULL CONSTRAINT [profileviewspidofDefault]  DEFAULT (''),
+	[ipaddress] [varchar](150) NOT NULL CONSTRAINT [profileviewsipaddressDefault]  DEFAULT (''),
+	[vieweddate] [smalldatetime] NOT NULL CONSTRAINT [profileviewsvieweddateDefault]  DEFAULT (getdate()),
+ CONSTRAINT [pkprofileviews] PRIMARY KEY CLUSTERED 
+(
+	[viewedbyid] ASC,
+	[pidof] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON,
+ ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+
+CREATE TABLE [Referals](
+	[Pid] [varchar](60) NOT NULL,
+	[referdby] [varchar](60) NOT NULL CONSTRAINT [ReferalsreferdbyDefault]  DEFAULT (''),
+	[refer2] [varchar](60) NOT NULL CONSTRAINT [Referalsrefer2Default]  DEFAULT (''),
+	[ref1val] [money] NOT NULL CONSTRAINT [Referalsref1valDefault]  DEFAULT ((0)),
+	[ref2val] [money] NOT NULL CONSTRAINT [Referalsref2valDefault]  DEFAULT ((0)),
+	[ipaddress] [varchar](150) NOT NULL CONSTRAINT [ReferalsipaddressDefault]  DEFAULT (''),
+	[paid] [varchar](1) NOT NULL CONSTRAINT [ReferalspaidDefault]  DEFAULT ('Y'),
+	[refdate] [smalldatetime] NOT NULL CONSTRAINT [ReferalsrefdateDefault]  DEFAULT (getdate())
+) ON [PRIMARY]
+
+
+CREATE TABLE [users](
+	[userid] [int] IDENTITY(1,1) NOT NULL,
+	[username] [varchar](250) NOT NULL CONSTRAINT [usersusernameDefault]  DEFAULT (''),
+	[passw] [varchar](250) NOT NULL CONSTRAINT [userspasswDefault]  DEFAULT (''),
+	[role] [varchar](50) NOT NULL CONSTRAINT [usersroleDefault]  DEFAULT (''),
+ CONSTRAINT [pkusers] PRIMARY KEY CLUSTERED 
+(
+	[userid] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, 
+ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]

@@ -1,0 +1,160 @@
+CREATE VIEW singlephoto  AS select distinct  profile.pid,
+(select top 1 photoname from photo where photo.pid=profile.pid)as photoname,photo.passw from profile inner join  photo
+on profile.pid=photo.pid
+ where photo.active='Y'
+
+
+
+
+
+create procedure approvephoto
+@photoid varchar(60)
+as
+update photo set active='Y' where photoid=@photoid
+
+
+create procedure approvephotoall
+@pid varchar(60)
+as
+update photo set active='Y' where pid=@pid
+
+
+create procedure approveprofile
+@pid varchar(60)
+as
+update profile set Approved='Y' where pid=@pid
+
+CREATE procedure beautychampfemale
+as
+select top 1 profile.pid,(select top 1 photoname from photo where photo.pid=profile.pid and photo.active='Y' and photo.passw='')as photoname ,photo.passw,fname,profiledate,count(pidof)
+ from profile 
+inner join photo on  profile.pid=photo.pid 
+inner join profileviews on profileviews.pidof=profile.pid
+where visibletoall='Y' and approved='Y' and gender='F'
+group by profile.pid,photoname,photo.passw,fname,profiledate
+order by count(pidof) desc
+
+create procedure delphoto
+@photoid varchar(60)
+as
+delete from photo where photoid=@photoid
+
+
+CREATE procedure beautychampmale
+as
+select top 1 profile.pid,(select top 1 photoname from photo where photo.pid=profile.pid and photo.active='Y' and photo.passw='')as photoname ,photo.passw,fname,profiledate,count(pidof)
+ from profile 
+inner join photo on  profile.pid=photo.pid 
+inner join profileviews on profileviews.pidof=profile.pid
+where visibletoall='Y' and approved='Y' and gender='M'
+group by profile.pid,photoname,photo.passw,fname,profiledate
+order by count(pidof) desc
+
+create procedure mostviewdFemaleprofiles
+as
+select distinct top 7 profile.pid,(select top 1 photoname from photo where photo.pid=profile.pid and photo.active='Y')as photoname ,photo.passw,fname,profiledate,count(pidof)
+ from profile 
+inner join photo on  profile.pid=photo.pid 
+inner join profileviews on profileviews.pidof=profile.pid
+where visibletoall='Y' and approved='Y' and gender='F'
+group by profile.pid,photoname,photo.passw,fname,profiledate
+order by count(pidof) desc
+
+create procedure mostviewdmaleprofiles
+as
+select distinct top 7 profile.pid,(select top 1 photoname from photo where photo.pid=profile.pid and photo.active='Y')as photoname ,photo.passw,fname,profiledate,count(pidof)
+ from profile 
+inner join photo on  profile.pid=photo.pid 
+inner join profileviews on profileviews.pidof=profile.pid
+where visibletoall='Y' and approved='Y' and gender='M'
+group by profile.pid,photoname,photo.passw,fname,profiledate
+order by count(pidof) desc
+
+create procedure mostviewdprofiles
+as
+select distinct top 7 profile.pid,(select top 1 photoname from photo where photo.pid=profile.pid and photo.active='Y')as photoname ,photo.passw,fname,profiledate,count(pidof)
+ from profile 
+inner join photo on  profile.pid=photo.pid 
+inner join profileviews on profileviews.pidof=profile.pid
+where visibletoall='Y' and approved='Y'
+group by profile.pid,photoname,photo.passw,fname,profiledate
+order by count(pidof) desc
+
+create procedure newlyreg
+as
+select distinct top 7 profile.pid,(select top 1 photoname from photo where photo.pid=profile.pid and photo.active='Y')as photoname ,photo.passw,fname,profiledate  from profile left  join photo on  profile.pid=photo.pid where visibletoall='Y' and approved='Y'  order by profiledate desc
+
+create procedure onlinemem
+as
+select distinct top 7 profile.pid,(select top 1 photoname from photo where photo.pid=profile.pid and photo.active='Y')as photoname ,photo.passw,fname,profiledate  from profile left  join photo on  profile.pid=photo.pid where visibletoall='Y' and approved='Y' and isonlinenow='Y' 
+
+CREATE procedure partnersearch
+@startRowIndex int,
+@maximumRows int,
+@jointype varchar(60),
+@criteria varchar(max)
+as
+Declare @sqlst as varchar(max)
+select @sqlst='select * from (
+select   ROW_NUMBER() OVER(ORDER BY profiledate DESC) AS rowid ,profile.pid,profile.profiledate, fname,lname,bdate,purpose,gender,ethnic,religion,caste,profile.countryname,whoami, profile.state, profile.cityid, singlephoto.photoname,singlephoto.passw from profile ' + @jointype  +  ' singlephoto on  profile.pid=singlephoto.pid  where  ' + @criteria + ' ) as kk'
+EXEC(@sqlst + ' where rowid > '+@startRowIndex+' AND rowid <= ('+ @startRowIndex + @maximumRows + ')')
+
+
+create procedure partnersearchcount
+@jointype varchar(60),
+@criteria varchar(max)
+as
+Declare @sqlst as varchar(max)
+select @sqlst='select  count(*)  from profile ' + @jointype  +  ' photo on  profile.pid=photo.pid  where  ' + @criteria
+
+EXEC(@sqlst)
+
+create procedure resetuser
+@pid varchar(60)
+as
+update profile set isonlinenow='N' where pid=@pid
+
+create procedure suspendprofile
+@pid varchar(60)
+as
+update profile set susp='Y' where pid=@pid
+
+CREATE procedure topearner
+as
+select pr.pid,pr.fname,pr.lname,pr.email,pr.gender,pr.countryname,pr.state,pr.cityid,pr.whoami,pr.purpose,pr.ethnic,pr.religion,pr.caste,sum(r1.ref1val) as sum1,photoname,ph.passw
+from profile pr join profile r1 on pr.pid=r1.ref1
+left join singlephoto ph on pr.pid=ph.pid
+and pr.paid='N' 
+group by pr.pid,pr.fname,pr.lname,pr.email,pr.gender,pr.passw,pr.countryname,pr.state,pr.cityid, pr.whoami,pr.purpose,pr.ethnic,pr.religion,pr.caste,photoname,ph.passw order by sum1 desc
+
+
+create procedure unsuspendprofile
+@pid varchar(60)
+as
+update profile set susp='N' where pid=@pid
+
+
+create procedure updatedate
+as
+update profile set bdate='1980-10-10'  where datediff(yy,bdate,getdate())<18
+
+CREATE  procedure viewprofile
+ @pid as varchar(60)
+as
+select top 1 profile.pid,headline,fname,lname,bdate,purpose,gender,countryname,state,cityid,whoami,
+lookingfor,profiledate,lastvisited,lastupdated,maritalstatus,mothertounge,annualincome,
+education,profession,htname,caste,eyesight,haircolor,ethnic,WT,complexion,starsign,smoke,diet,
+Drink,Drugs,religion,zipcode,isonlinenow,(select top 1 photoname from  photo where photo.pid=profile.pid and photo.active='Y') as photoname,photo.passw,susp from profile left join photo on profile.pid=photo.pid where profile.pid=@pid
+
+
+CREATE procedure viewprofileforadmin
+@pid varchar(60)
+as
+select top 1 profile.pid,headline,fname,lname,bdate,purpose,gender,countryname,state,cityid,whoami,
+lookingfor,profiledate,lastvisited,lastupdated,maritalstatus,mothertounge,annualincome,
+education,profession,htname,caste,eyesight,haircolor,ethnic,WT,complexion,starsign,smoke,diet,
+Drink,Drugs,religion,zipcode,isonlinenow,photoname,profile.passw,approved,email,ipaddress,susp,isdoubtful,ipcountry from profile left join photo on profile.pid=photo.pid where profile.pid=@pid
+
+
+
+

@@ -1,0 +1,118 @@
+1,11,Andhra Pradesh
+1,12,Arunachal
+1,13,Assam
+1,14,Bihar
+1,15,Chhattisgarh
+1,16,Goa
+1,17,Gujarat
+1,18,Haryana
+1,19,Himachal Pradesh
+1,20,Jammu & Kashmir
+1,21,Jharkhand
+1,22,Karnataka
+1,23,Kerala
+1,24,Madhya Pradesh
+1,25,Maharashtra
+1,26,Manipur
+1,27,Meghalaya
+1,28,Mizoram
+1,29,Nagaland
+1,30,Orissa
+1,31,Punjab
+1,32,Rajasthan
+1,33,Sikkim
+1,34,Tamil Nadu
+1,35,Tripura
+1,36,Uttar Pradesh
+1,37,Uttaranchal
+1,38,West Bengal
+202,2024,bangkok
+217,2175,New York
+185,1858,singapore
+14,149,Australia
+181,18110,Saudi Arabia
+235,23511,Oman
+155,15512,Oman
+217,21713,USA
+215,21514,dubai
+45,4515,China
+213,21316,United Kingdom
+202,20217,Thailand
+98,9818,Indonesia
+62,6219,Egypt
+156,15620,Pakistan
+102,10221,Italy
+19,1922,Banglades
+143,14323,Nepal
+193,19324,Sri Lanka
+18,1825,Baharin
+124,12426,Malaysia
+245,24527,Work From home
+1,128,Delhi
+110,11029,Kuwait
+167,16730,Qatar
+217,21731,Alabama
+217,21732,Alaska
+217,21733,Arizona
+217,21734,Arkansas
+217,21735,California
+217,21736,Colorado
+217,21737,Connecticut
+217,21738,Delaware
+217,21739,Florida
+217,21740,Georgia
+217,21741,Hawaii
+217,21742,Idaho
+217,21743,Illinois
+217,21744,Indiana
+217,21745,Iowa
+217,21746,Kansas
+217,21747,Kentucky
+217,21748,Louisiana
+217,21749,Maine
+217,21750,Maryland
+217,21751,Massachusetts
+217,21752,Michigan
+217,21753,Minnesota
+217,21754,Mississippi
+217,21755,Missouri
+217,21756,Montana
+217,21757,Nebraska
+217,21758,Nevada
+217,21759,New Hampshire
+217,21760,New Jersey
+217,21761,New Mexico
+217,21762,North Carolina
+217,21763,North Dakota
+217,21764,Ohio
+217,21765,Oklahoma
+217,21766,Oregon
+217,21767,Pennsylvania
+217,21768,Rhode Island
+217,21769,South Carolina
+217,21770,South Dakota
+217,21771,Tennessee
+217,21772,Texas
+217,21773,Utah
+217,21774,Vermont
+217,21775,Virginia
+217,21776,Washington
+217,21777,West Virginia
+217,21778,Wisconsin
+217,21779,Wyoming
+39,3980,Alberta
+39,3981,British Columbia
+39,3982,Manitoba
+39,3983,New Brunswick
+39,3984,Newfoundland
+39,3985,Northwest Territories
+39,3986,Nova Scotia
+39,3987,Nunavut
+39,3988,Ontario
+39,3989,Prince Edward Island
+39,3990,Quebec
+39,3991,Saskatchewan
+39,3992,Yukon
+162,16293,Philippines
+228,22894,Yemen
+2,295,Afghanistan

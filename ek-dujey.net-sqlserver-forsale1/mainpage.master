@@ -1,0 +1,59 @@
+<%@ Master Language="VB" CodeFile="mainpage.master.vb" Inherits="mainpage" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head runat="server">
+    <title>Untitled Page</title>
+    <link href="StyleSheet.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<center>
+
+    <form id="form1" runat="server">
+    <div>
+        <table width="90%">
+            <tr>
+                <td align="left" id="TH1" runat="server" colspan="3">
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/Default.aspx">Home</asp:HyperLink></th>
+                <th>
+                    <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="~/regi.aspx">Register</asp:HyperLink></th>
+                <th>
+                    <asp:HyperLink ID="HyperLink5" runat="server" NavigateUrl="~/members/Default.aspx">Login</asp:HyperLink>&nbsp;</th>
+            </tr>
+        </table>
+       
+        <br />
+        <asp:contentplaceholder id="ContentPlaceHolder1" runat="server">
+            &nbsp;</asp:contentplaceholder>
+        <br />
+        
+       </div>    
+    </form>
+
+    <table width="90%" class="splfordata">
+    <tr>
+    <td>
+    <asp:HyperLink ID="HyperLink4" runat="server" NavigateUrl="~/Termsand Conditions.aspx">Terms and Conditions</asp:HyperLink></td>
+    <td>
+        
+    <asp:HyperLink ID="HyperLink3" runat="server" NavigateUrl="http://www.websol-dating-software.com">Dating Software From Websol</asp:HyperLink>
+    </td>
+        <td>
+            <asp:HyperLink ID="HyperLink6" runat="server" NavigateUrl="~/contactus.aspx">Contact Us</asp:HyperLink></td>
+    </tr>
+    </table>
+</center>
+
+  
+  <%  If Request.Cookies("scammer") IsNot Nothing Then
+         Response.Redirect("usedbyscammers.aspx")
+     End If
+     %>
+
+</body>
+</html>
